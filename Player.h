@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Bullet.h"
 #include "Vector2.h"
+#include "data.h"
 
 class Player {
 private:
@@ -13,6 +14,7 @@ private:
     int radius;
     int bulletShotCoolTime;
     int explosiontimer;
+    int Life;
 
     // フラグ
     int isBulletShot;
@@ -21,6 +23,7 @@ private:
 
     // 包含
     Bullet* bullet_[10];
+   
 
 public:
     /// <summary>
@@ -43,7 +46,7 @@ public:
     /// <summary>
     /// プレイヤーの描画処理
     /// </summary>
-    void Draw();
+    void Draw(const Imges& imges);
 
     /// <summary>
     /// 座標を取得する

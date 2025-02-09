@@ -10,9 +10,10 @@ Player::Player()
     move = { 0.0f, 0.0f };
     newMove = { 0.0f, 0.0f };
     length = 0.0f;
-    radius = 40;
+    radius = 64;
     bulletShotCoolTime = 10;
     explosiontimer = 60;
+    Life = 3;
 
     // フラグ
     isAlive = true;
@@ -99,7 +100,7 @@ void Player::Update(char* keys, char* prekeys)
                 }
             }
         }
-           
+
         // (連射可能の場合)発射のクールタイム
         if (isBulletShot) {
             bulletShotCoolTime--;
@@ -128,12 +129,17 @@ void Player::Update(char* keys, char* prekeys)
         explosiontimer--;
 
         if (explosiontimer <= 0) {
-            isAlive = false;
+            Life--;
+            if (Life < 0) {
+                isAlive = false;
+            }
+            isHit = false;
+            explosiontimer = 60;
         }
     }
 }
 
-void Player::Draw()
+void Player::Draw(const Imges& imges)
 {
     /* 描画処理 */
     for (int i = 0; i < 10; i++) {
@@ -144,9 +150,12 @@ void Player::Draw()
             bullet_[i]->Draw();
         }
     }
-
+    
+    
     if (explosiontimer % 2 == 0) {
-        Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFFFFFFFF, kFillModeSolid);
+       /* Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFFFFFFFF, kFillModeSolid);*/
+
+        Novice::DrawSprite(static_cast<int>(pos_.x), static_cast<int>(pos_.y), imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
     }
 }
 

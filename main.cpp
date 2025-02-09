@@ -1,9 +1,10 @@
 #include "Enemy.h"
 #include "EnemyA.h"
+#include "EnemyB.h"
 #include "Player.h"
 #include "Vector2.h"
+#include "data.h"
 #include <Novice.h>
-#include "EnemyBoss.h"
 
 const char kWindowTitle[] = "LC1B_02_イケダ_タクミ_PG2_評価課題";
 
@@ -30,16 +31,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     };
 
     Player* player = new Player();
-    Enemy* enemy[31];
+    Enemy* enemy[20];
+    Imges imges;
 
     Scene sceneNumber = TITLE;
 
     Vector2 tragetPosA = { 0.0f, 0.0f };
     int tragetRadiusA = 0;
     int tragetisAliveA = 0;
-    Vector2 tragetPosB[30] = { 0.0f, 0.0f };
-    int tragetRadiusB[30] = { 0 };
-    int tragetisAliveB[30] = { 0 };
+    Vector2 tragetPosB[20] = { 0.0f, 0.0f };
+    int tragetRadiusB[20] = { 0 };
+    int tragetisAliveB[20] = { 0 };
     Vector2 tragetPosC[10] = { 0.0f, 0.0f };
     int tragetisAliveC[10] = { 0 };
     int tragetRadiusC[10] = { 0 };
@@ -66,8 +68,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 // 初期化
                 player = new Player();
 
-                for (int i = 0; i < 30; i++) {
-                    enemy[i] = new EnemyA;
+                for (int i = 0; i < 20; i++) {
+                    if (i < 10) {
+                        enemy[i] = new EnemyA;
+                    } else {
+                        enemy[i] = new EnemyB;
+                    }
                 }
             }
 
@@ -78,6 +84,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
             /// ↓描画処理ここから
             ///
+
+            Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0xbbbbbbFF);
 
             ///
             /// ↑描画処理ここまで
@@ -115,7 +123,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             tragetPosA = player->GetPlayerPos();
             tragetRadiusA = player->GetPlayerRadius();
 
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < 20; i++) {
                 enemy[i]->Update();
 
                 tragetPosB[i] = enemy[i]->GetEnemyPos();
@@ -142,7 +150,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 if (tragetisAliveC[j]) {
                     tragetPosC[j] = player->GetBulletPos(j);
 
-                    for (int z = 0; z < 30; z++) {
+                    for (int z = 0; z < 20; z++) {
 
                         // 敵側の生存フラグ取得
 
@@ -164,7 +172,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             if (!tragetisAliveA) {
 
                 delete player;
-                for (int i = 0; i < 30; i++) {
+                for (int i = 0; i < 20; i++) {
                     delete enemy[i];
                 }
                 sceneNumber = RESULT;
@@ -180,9 +188,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             /// ↓描画処理ここから
             ///
 
-            player->Draw();
+            Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
 
-            for (int i = 0; i < 30; i++) {
+            player->Draw(imges);
+
+            for (int i = 0; i < 20; i++) {
                 enemy[i]->Draw();
             }
 
@@ -206,6 +216,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
             /// ↓描画処理ここから
             ///
+
+            Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
 
             ///
             /// ↑描画処理ここまで

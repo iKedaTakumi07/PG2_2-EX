@@ -34,7 +34,3 @@ int Enemy::SetEnemyisAlive(int isEnemyAlive)
     return 0;
 }
 
-int Enemy::SetBossIsArrival(int BossisArrival)
-{
-    return 0;
-}

@@ -36,8 +36,6 @@ public:
 
     virtual int GetEnemyisAlive() { return isAlive; };
 
-    virtual int SetBossIsArrival(int BossisArrival);
-
 protected:
     Vector2 pos_;
     Vector2 velocity; // 速度

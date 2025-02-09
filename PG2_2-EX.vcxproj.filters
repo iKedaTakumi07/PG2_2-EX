@@ -41,7 +41,7 @@
     <ClCompile Include="EnemyA.cpp">
       <Filter>date\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBoss.cpp">
+    <ClCompile Include="EnemyB.cpp">
       <Filter>date\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
@@ -142,8 +142,11 @@
     <ClInclude Include="Vector2.h">
       <Filter>date</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBoss.h">
+    <ClInclude Include="EnemyB.h">
       <Filter>date\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>date</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
