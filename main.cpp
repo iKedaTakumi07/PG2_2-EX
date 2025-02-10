@@ -45,6 +45,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     Vector2 tragetPosC[10] = { 0.0f, 0.0f };
     int tragetisAliveC[10] = { 0 };
     int tragetRadiusC[10] = { 0 };
+    int score = 0;
+    int targetScore = 0;
+    int arrayScore[8] = { 0 };
 
     // ウィンドウの×ボタンが押されるまでループ
     while (Novice::ProcessMessage() == 0) {
@@ -86,6 +89,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
 
             Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0xbbbbbbFF);
+            Novice::DrawSprite(0, 0, imges.title, 1, 1, 0.0f, 0xbbbbbbFF);
 
             ///
             /// ↑描画処理ここまで
@@ -180,6 +184,34 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 break;
             }
 
+            // ===========================================
+            // スコアの表示(可能ならクラス化)
+            // ===========================================
+            targetScore = score;
+
+            arrayScore[0] = targetScore / 10000000;
+            targetScore %= 10000000;
+
+            arrayScore[1] = targetScore / 1000000;
+            targetScore %= 1000000;
+
+            arrayScore[2] = targetScore / 100000;
+            targetScore %= 100000;
+
+            arrayScore[3] = targetScore / 10000;
+            targetScore %= 10000;
+
+            arrayScore[4] = targetScore / 1000;
+            targetScore %= 1000;
+
+            arrayScore[5] = targetScore / 100;
+            targetScore %= 100;
+
+            arrayScore[6] = targetScore / 10;
+            targetScore %= 10;
+
+            arrayScore[7] = targetScore;
+
             ///
             /// ↑更新処理ここまで
             ///
@@ -189,6 +221,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
 
             Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
+
+            // スコア
+            Novice::DrawSprite(1000, 265, imges.Score, 1, 1, 0.0f, 0xFFFFFFFF);
+
+            for (int i = 0; i < 8; i++) {
+                Novice::DrawSprite(1000 + (i * 32), 300, imges.ghnumber[arrayScore[i]], 2, 2, 0.0f, 0xFFFFFFFF);
+            }
 
             player->Draw(imges);
 
