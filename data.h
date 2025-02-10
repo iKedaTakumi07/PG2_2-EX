@@ -6,6 +6,7 @@ struct Imges {
     int title = Novice::LoadTexture("./Resources/images/title.png");
     int playerGh = Novice::LoadTexture("./Resources/images/player.png");
     int bg = Novice::LoadTexture("./Resources/images/gb.png");
+    int bg2 = Novice::LoadTexture("./Resources/images/bg2.png");
     int ghnumber[10] = {
         Novice::LoadTexture("./Resources/images/number/number0.png"),
         Novice::LoadTexture("./Resources/images/number/number1.png"),
@@ -18,5 +19,10 @@ struct Imges {
         Novice::LoadTexture("./Resources/images/number/number8.png"),
         Novice::LoadTexture("./Resources/images/number/number9.png")
     };
-    int Score = Novice::LoadTexture("./Resources/images/score.png");
+
+    int Score = Novice::LoadTexture("./Resources/images/number/score.png");
+};
+
+struct sound {
+    int title = Novice::LoadAudio("./Resources/images/number/score.png");
 };

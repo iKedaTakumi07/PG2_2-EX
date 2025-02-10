@@ -4,7 +4,7 @@
 
 Player::Player()
 {
-    pos_ = { 620.0f, 700.0f };
+    pos_ = { 620.0f, 600.0f };
     velocity_ = { 0.0f, 0.0f };
     acacceleration = { 0.0f, -2.1f };
     move = { 0.0f, 0.0f };
@@ -108,7 +108,7 @@ void Player::Update(char* keys, char* prekeys)
 
                 // フラグをfalseに,クールタイムをリセット
                 isBulletShot = false;
-                bulletShotCoolTime = 10;
+                bulletShotCoolTime = 5;
             }
         }
     }
@@ -130,7 +130,7 @@ void Player::Update(char* keys, char* prekeys)
 
         if (explosiontimer <= 0) {
             Life--;
-            if (Life < 0) {
+            if (Life < 1) {
                 isAlive = false;
             }
             isHit = false;
@@ -153,7 +153,7 @@ void Player::Draw(const Imges& imges)
     
     
     if (explosiontimer % 2 == 0) {
-       /* Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFFFFFFFF, kFillModeSolid);*/
+      
 
         Novice::DrawSprite(static_cast<int>(pos_.x), static_cast<int>(pos_.y), imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
     }

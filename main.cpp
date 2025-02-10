@@ -70,6 +70,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
                 // 初期化
                 player = new Player();
+                score = 0;
+                for (int i = 0; i < 8; i++) {
+                    arrayScore[i] = { 0 };
+                }
 
                 for (int i = 0; i < 20; i++) {
                     if (i < 10) {
@@ -124,16 +128,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             // 更新処理
             player->Update(keys, preKeys);
 
+            // 座標を取得する
             tragetPosA = player->GetPlayerPos();
             tragetRadiusA = player->GetPlayerRadius();
 
             for (int i = 0; i < 20; i++) {
                 enemy[i]->Update();
 
+                // 座標を取得する
                 tragetPosB[i] = enemy[i]->GetEnemyPos();
                 tragetRadiusB[i] = enemy[i]->GetRadiusyPos();
                 tragetisAliveB[i] = enemy[i]->GetEnemyisAlive();
 
+                // プレイヤーと敵
                 if (tragetisAliveB[i]) {
                     // 当たり判定
                     if (tragetPosA.x + tragetRadiusA > tragetPosB[i].x && tragetPosB[i].x + tragetRadiusB[i] > tragetPosA.x) {
@@ -146,23 +153,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                 }
             }
 
+            // 敵とプレイヤーの弾
             for (int j = 0; j < 10; j++) {
 
+                // フラグ,半径を取得する
                 tragetisAliveC[j] = player->GetBulletisAlive(j);
                 tragetRadiusC[j] = player->GetBulletRadius(j);
 
                 if (tragetisAliveC[j]) {
+                    // 座標を取得する
                     tragetPosC[j] = player->GetBulletPos(j);
 
                     for (int z = 0; z < 20; z++) {
 
                         // 敵側の生存フラグ取得
-
                         if (tragetisAliveB[z]) {
 
+                            // 当たっているなら生存をfalseに
                             if (tragetPosC[j].x + tragetRadiusC[j] > tragetPosB[z].x && tragetPosB[z].x + tragetRadiusB[z] > tragetPosC[j].x) {
                                 if (tragetPosC[j].y + tragetRadiusC[j] > tragetPosB[z].y && tragetPosB[z].y + tragetRadiusB[z] > tragetPosC[j].y) {
-
+                                    score += 50;
                                     player->SetBulletisAlive(j, false);
                                     enemy[z]->SetEnemyisAlive(false);
                                 }
@@ -170,18 +180,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
                         }
                     }
                 }
-            }
-
-            tragetisAliveA = player->GetPlayerisAlive();
-            if (!tragetisAliveA) {
-
-                delete player;
-                for (int i = 0; i < 20; i++) {
-                    delete enemy[i];
-                }
-                sceneNumber = RESULT;
-
-                break;
             }
 
             // ===========================================
@@ -212,6 +210,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
             arrayScore[7] = targetScore;
 
+            // プレイヤーの残機が0ならリザルトに
+            tragetisAliveA = player->GetPlayerisAlive();
+            if (!tragetisAliveA) {
+
+                delete player;
+                for (int i = 0; i < 20; i++) {
+                    delete enemy[i];
+                }
+                sceneNumber = RESULT;
+
+                break;
+            }
+
             ///
             /// ↑更新処理ここまで
             ///
@@ -221,6 +232,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
 
             Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
+            Novice::DrawSprite(1000, 0, imges.bg2, 1, 1, 0.0f, 0xffffffff);
 
             // スコア
             Novice::DrawSprite(1000, 265, imges.Score, 1, 1, 0.0f, 0xFFFFFFFF);
@@ -246,7 +258,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             /// ↓更新処理ここから
             ///
 
-            sceneNumber = TITLE;
+            if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+                sceneNumber = TITLE;
+            }
 
             ///
             /// ↑更新処理ここまで
@@ -257,6 +271,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
 
             Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
+
+            // スコア
+            Novice::DrawSprite(360, 390, imges.Score, 1, 1, 0.0f, 0xFFFFFFFF);
+
+            for (int i = 0; i < 8; i++) {
+                Novice::DrawSprite(510 + (i * 32), 400, imges.ghnumber[arrayScore[i]], 2, 2, 0.0f, 0xFFFFFFFF);
+            }
 
             ///
             /// ↑描画処理ここまで
