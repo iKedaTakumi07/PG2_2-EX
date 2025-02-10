@@ -12,7 +12,7 @@ EnemyA::EnemyA()
     move = { 0.0f, 0.0f };
     newMove = { 0.0f, 0.0f };
     length = 0.0f;
-    radius = 40;
+    radius = 32;
     amplitude = 5.0f;
     theta = 1.0f / 8.0f * static_cast<float>(M_PI);
     isAlive = false;
@@ -46,7 +46,7 @@ void EnemyA::Update()
     }
 }
 
-void EnemyA::Draw()
+void EnemyA::Draw(const Imges& imges)
 {
     if (isAlive) {
         Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);

@@ -42,9 +42,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
     Vector2 tragetPosB[20] = { 0.0f, 0.0f };
     int tragetRadiusB[20] = { 0 };
     int tragetisAliveB[20] = { 0 };
-    Vector2 tragetPosC[10] = { 0.0f, 0.0f };
-    int tragetisAliveC[10] = { 0 };
-    int tragetRadiusC[10] = { 0 };
+    Vector2 tragetPosC[20] = { 0.0f, 0.0f };
+    int tragetisAliveC[20] = { 0 };
+    int tragetRadiusC[20] = { 0 };
     int score = 0;
     int targetScore = 0;
     int arrayScore[8] = { 0 };
@@ -154,7 +154,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             }
 
             // 敵とプレイヤーの弾
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 20; j++) {
 
                 // フラグ,半径を取得する
                 tragetisAliveC[j] = player->GetBulletisAlive(j);
@@ -244,7 +244,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             player->Draw(imges);
 
             for (int i = 0; i < 20; i++) {
-                enemy[i]->Draw();
+                enemy[i]->Draw(imges);
             }
 
             ///
@@ -271,12 +271,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
             ///
 
             Novice::DrawSprite(0, 0, imges.bg, 1, 1, 0.0f, 0x666666FF);
+            Novice::DrawSprite(0, 0, imges.RESULT, 1, 1, 0.0f, 0xFFFFFFFF);
 
             // スコア
-            Novice::DrawSprite(360, 390, imges.Score, 1, 1, 0.0f, 0xFFFFFFFF);
+            Novice::DrawSprite(360, 300, imges.Score, 1, 1, 0.0f, 0xFFFFFFFF);
 
             for (int i = 0; i < 8; i++) {
-                Novice::DrawSprite(510 + (i * 32), 400, imges.ghnumber[arrayScore[i]], 2, 2, 0.0f, 0xFFFFFFFF);
+                Novice::DrawSprite(510 + (i * 32), 300, imges.ghnumber[arrayScore[i]], 2, 2, 0.0f, 0xFFFFFFFF);
             }
 
             ///

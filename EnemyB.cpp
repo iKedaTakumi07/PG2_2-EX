@@ -7,12 +7,12 @@
 EnemyB::EnemyB()
 {
     pos_ = { static_cast<float>(rand() % 700 + 300), static_cast<float>(rand() % 700 - 800) };
-    velocity = { 5.0f, 3.0f };
+    velocity = { 7.5f, 3.0f };
     acacceleration = { 0.0f, 0.0f };
     move = { 0.0f, 0.0f };
     newMove = { 0.0f, 0.0f };
     length = 0.0f;
-    radius = 40;
+    radius = 32;
     isAlive = false;
     respawntimer = 10;
 }
@@ -42,7 +42,7 @@ void EnemyB::Update()
     }
 }
 
-void EnemyB::Draw()
+void EnemyB::Draw(const Imges& imges)
 {
     if (isAlive) {
         Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);

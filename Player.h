@@ -22,7 +22,7 @@ private:
     int isHit;
 
     // 包含
-    Bullet* bullet_[10];
+    Bullet* bullet_[20];
    
 
 public:

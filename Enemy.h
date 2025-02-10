@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Vector2.h"
+#include "data.h"
 
 class Enemy {
 public:
@@ -21,7 +22,7 @@ public:
     /// <summary>
     /// 描画処理
     /// </summary>
-    virtual void Draw();
+    virtual void Draw(const Imges& imges);
 
     virtual Vector2 GetEnemyPos() { return pos_; };
 

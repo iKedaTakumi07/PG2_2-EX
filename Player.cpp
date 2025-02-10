@@ -20,14 +20,14 @@ Player::Player()
     isHit = false;
     isBulletShot = false;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         bullet_[i] = new Bullet();
     }
 }
 
 Player::~Player()
 {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         delete bullet_[i];
     }
 }
@@ -84,7 +84,7 @@ void Player::Update(char* keys, char* prekeys)
             if (!isBulletShot) {
                 int EnemyisAlive = false;
 
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
 
                     EnemyisAlive = bullet_[i]->GetBulletisAlive();
 
@@ -114,7 +114,7 @@ void Player::Update(char* keys, char* prekeys)
     }
 
     // 弾が発射されているなら更新処理をする
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         int EnemyisAlive = false;
         EnemyisAlive = bullet_[i]->GetBulletisAlive();
 
@@ -130,7 +130,7 @@ void Player::Update(char* keys, char* prekeys)
 
         if (explosiontimer <= 0) {
             Life--;
-            if (Life < 1) {
+            if (Life < 0) {
                 isAlive = false;
             }
             isHit = false;
@@ -142,7 +142,7 @@ void Player::Update(char* keys, char* prekeys)
 void Player::Draw(const Imges& imges)
 {
     /* 描画処理 */
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         int EnemyisAlive = false;
         EnemyisAlive = bullet_[i]->GetBulletisAlive();
 
@@ -150,10 +150,21 @@ void Player::Draw(const Imges& imges)
             bullet_[i]->Draw();
         }
     }
-    
-    
+
+    // 残機
+    if (Life >= 3) {
+        Novice::DrawSprite(1000, 200, imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
+    }
+    if (Life >= 2) {
+        Novice::DrawSprite(1064, 200, imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
+    }
+    if (Life >= 1) {
+        Novice::DrawSprite(1128, 200, imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
+    }
+
+
+    // 　キャラ本人
     if (explosiontimer % 2 == 0) {
-      
 
         Novice::DrawSprite(static_cast<int>(pos_.x), static_cast<int>(pos_.y), imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
     }

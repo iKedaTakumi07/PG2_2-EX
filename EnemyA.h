@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Enemy.h"
+#include "data.h"
 
 class EnemyA : public Enemy {
 public:
@@ -21,7 +22,7 @@ public:
     /// <summary>
     /// 描画処理
     /// </summary>
-    void Draw() override;
+    void Draw(const Imges& imges) override;
 
     Vector2 GetEnemyPos() { return pos_; };
 
