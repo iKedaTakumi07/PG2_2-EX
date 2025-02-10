@@ -6,6 +6,7 @@
 class Player {
 private:
     Vector2 pos_; // 座標
+    Vector2 prepos_; // 座標
     Vector2 velocity_; // 速度
     Vector2 acacceleration; // 加速度
     Vector2 move;

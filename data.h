@@ -8,6 +8,7 @@ struct Imges {
     int bg = Novice::LoadTexture("./Resources/images/gb.png");
     int bg2 = Novice::LoadTexture("./Resources/images/bg2.png");
     int RESULT = Novice::LoadTexture("./Resources/images/RESULT.png");
+    int enemy = Novice::LoadTexture("./Resources/images/enemy.png");
     int ghnumber[10] = {
         Novice::LoadTexture("./Resources/images/number/number0.png"),
         Novice::LoadTexture("./Resources/images/number/number1.png"),

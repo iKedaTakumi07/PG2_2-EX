@@ -49,7 +49,9 @@ void EnemyA::Update()
 void EnemyA::Draw(const Imges& imges)
 {
     if (isAlive) {
-        Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);
+       /* Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);*/
+
+        Novice::DrawSprite(static_cast<int>(pos_.x), static_cast<int>(pos_.y), imges.enemy, 1, 1, 0.0f, 0xFFFFFFFF);
     }
 }
 

@@ -5,6 +5,7 @@
 Player::Player()
 {
     pos_ = { 620.0f, 600.0f };
+    prepos_ = { 0.0f, 0.0f };
     velocity_ = { 0.0f, 0.0f };
     acacceleration = { 0.0f, -2.1f };
     move = { 0.0f, 0.0f };
@@ -42,6 +43,9 @@ void Player::Update(char* keys, char* prekeys)
     /* w, a, s, dを押したなら移動 */
 
     if (!isHit) {
+
+        prepos_ = pos_;
+
         move = { 0.0f, 0.0f };
 
         if (keys[DIK_W]) {
@@ -65,7 +69,6 @@ void Player::Update(char* keys, char* prekeys)
         }
 
         // 横方向の正規化
-
         length = sqrtf(move.x * move.x + move.y * move.y);
 
         if (length != 0.0f) {
@@ -76,6 +79,12 @@ void Player::Update(char* keys, char* prekeys)
             pos_.y += newMove.y * velocity_.y;
         }
 
+        if (pos_.x + radius >= 1000 || pos_.x <= 0) {
+            pos_.x = prepos_.x;
+        }
+        if (pos_.y + radius >= 720 || pos_.y <= 0) {
+            pos_.y = prepos_.y;
+        }
         /* 弾の発射処理 */
 
         // 一部変更予定(setとgetのを作る)
@@ -161,7 +170,6 @@ void Player::Draw(const Imges& imges)
     if (Life >= 1) {
         Novice::DrawSprite(1128, 200, imges.playerGh, 1, 1, 0.0f, 0xFFFFFFFF);
     }
-
 
     // 　キャラ本人
     if (explosiontimer % 2 == 0) {

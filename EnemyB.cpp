@@ -24,7 +24,6 @@ EnemyB::~EnemyB()
 void EnemyB::Update()
 {
     if (isAlive) {
-       
 
         pos_.y += velocity.y;
         if (pos_.y >= 760) {
@@ -45,7 +44,9 @@ void EnemyB::Update()
 void EnemyB::Draw(const Imges& imges)
 {
     if (isAlive) {
-        Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);
+        /*  Novice::DrawBox(static_cast<int>(pos_.x), static_cast<int>(pos_.y), static_cast<int>(radius), static_cast<int>(radius), 0.0f, 0xFF0000FF, kFillModeSolid);*/
+
+        Novice::DrawSprite(static_cast<int>(pos_.x), static_cast<int>(pos_.y), imges.enemy, 1, 1, 0.0f, 0xFFFFFFFF);
     }
 }
 
